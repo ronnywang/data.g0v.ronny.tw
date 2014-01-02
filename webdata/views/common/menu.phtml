@@ -1,12 +1,42 @@
+<?php
+$count_group = json_decode(KeyValue::get('count_group'));
+$type_map = array(
+    'kindName' => '主題分類',
+    'cateCodeName' => '服務分類',
+    'orgFullname' => '機關別分類',
+    'dataTypeName' => '資料類型',
+);
+?>
 <ul>
     <li><a href="/index/list">全部資料集(<?= count(DataSet::search(1)) ?>)</a></li>
     <li>
     分類查詢
     <ol>
-        <li>主題分類</li>
-        <li>服務分類</li>
-        <li>機關別分類</li>
-        <li>資料類型</li>
+        <?php foreach ($type_map as $id => $name) { ?>
+        <li class="li-group" data-id="<?= $this->escape($id) ?>"><a href="#"><?= $this->escape($name) ?></a></li>
+        <?php } ?>
     </ol>
+    <?php foreach ($type_map as $id => $name) { ?>
+    <div id="div-group-<?= $this->escape($id) ?>" class="div-group" style="display:none">
+        <h3><?= $this->escape($name) ?></h3>
+        <ul>
+            <?php foreach ($count_group->{$id} as $group => $count) { ?>
+            <li>
+            <a href="/index/list?<?= urlencode($id) ?>=<?= urlencode($group) ?>"><?= $this->escape($group) ?>(<?= $count ?>)</a>
+            </li>
+            <?php } ?>
+        </ul>
+    </div>
+    <?php } ?>
     </li>
 </ul>
+<script>
+$('.li-group').click(function(e){
+    e.preventDefault();
+    $('.div-group').hide();
+    $('#div-group-' + $(this).attr('data-id')).show();
+});
+<?php if ($this->filter_type) { ?>
+    $('.li-group[data-id=' + <?= json_encode($this->filter_type) ?> +']').click();
+<?php } ?>
+</script>

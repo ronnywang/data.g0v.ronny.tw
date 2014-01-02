@@ -26,11 +26,14 @@ class IndexController extends Pix_Controller
         $support_query = array(
             'dataTypeName' => '資料集類型',
             'orgFullname' => '資料集提供機關',
+            'kindName' => '主題分類',
+            'cateCodeName' => '服務分類',
         );
         foreach ($support_query as $type => $type_name) {
             if (array_key_exists($type, $_GET)) {
                 $this->view->datasets = DataSet::search("data->>'{$type}' = '" . addslashes($_GET[$type]) . "'");
                 $this->view->desc = $type_name . '：' . $_GET[$type];
+                $this->view->filter_type = $type;
                 return;
             }
         }
