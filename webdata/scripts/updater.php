@@ -27,6 +27,7 @@ class Updater
             $types = array();
             foreach ($type_list as $type) {
                 if ($xml_list[$name]->{$type}) {
+                    $count['dataFormat'][$type] ++;
                     $types[] = $type;
                 }
             }

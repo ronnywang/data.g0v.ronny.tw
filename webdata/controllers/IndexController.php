@@ -23,6 +23,13 @@ class IndexController extends Pix_Controller
             return;
         }
 
+        if ($_GET['dataFormat']) {
+            $this->view->datasets = DataSet::search("POSITION('" . addslashes($_GET['dataFormat']) . "' IN data->>'types') > 0");
+            $this->view->desc = "資料格式：" . $_GET['dataFormat'];
+            $this->view->filter_type = 'dataFormat';
+            return;
+        }
+
         $support_query = array(
             'dataTypeName' => '資料集類型',
             'orgFullname' => '資料集提供機關',
