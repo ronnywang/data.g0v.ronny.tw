@@ -1,0 +1,65 @@
+<?= $this->partial('/common/header.phtml', $this) ?>
+<ol class="breadcrumb">
+    <li><a href="/">首頁</a>
+    <span class="divider">/</span></li>
+    <li><a href="/index/list">資料集下載</a></li>
+    <span class="divider">/</span>
+    <li><?= $this->escape($this->name) ?></li>
+</ol>
+<div class="row-fluid">
+<div class="span2">
+    <?= $this->partial('/common/menu.phtml', $this) ?>
+</div>
+<div class="span10">
+<?php foreach ($this->types as $type) { ?>
+<a href="<?= $this->escape($this->dataset->{$type}) ?>"><?= $this->Escape($type) ?></a>
+<?php } ?>
+<table class="table">
+    <tr>
+        <td>資料集類型</td>
+        <td><a href="/index/list?dataTypeName=<?= urlencode($this->dataset->dataTypeName) ?>"><?= $this->escape($this->dataset->dataTypeName) ?></a></td>
+    </tr>
+    <tr>
+        <td>資料集描述</td>
+        <td><?= $this->escape($this->dataset->dataDesc) ?></td>
+    </tr>
+    <tr>
+        <td>主要欄位說明</td>
+        <td><?= $this->escape($this->dataset->columnDesc) ?></td>
+    </tr>
+    <tr>
+        <td>資料集提供機關</td>
+        <td><a href="/index/list?orgFullname=<?= urlencode($this->dataset->orgFullname) ?>"><?= $this->escape($this->dataset->orgFullname) ?></a></td>
+    </tr>
+    <tr>
+        <td>更新頻率</td>
+        <td><?= $this->escape($this->dataset->updateCycle) ?></td>
+    </tr>
+    <tr>
+        <td>授權方式</td>
+        <td><?= $this->escape($this->dataset->authWay) ?></td>
+    </tr>
+    <tr>
+        <td>授權說明網址</td>
+        <td><?= $this->escape($this->dataset->authLink) ?></td>
+    </tr>
+    <tr>
+        <td>計費方式</td>
+        <td><?= $this->escape($this->dataset->chargeType) ?></td>
+    </tr>
+    <tr>
+        <td>編碼格式</td>
+        <td><?= $this->escape($this->dataset->dataEncoding) ?></td>
+    </tr>
+    <tr>
+        <td>資料集提供機關聯絡人</td>
+        <td><?= $this->escape($this->dataset->contactName) ?></td>
+    </tr>
+    <tr>
+        <td>資料集提供機關 聯絡人電話</td>
+        <td><?= $this->escape($this->dataset->contactPhone) ?></td>
+    </tr>
+</table>
+</div>
+</div>
+<?= $this->partial('/common/footer.phtml', $this) ?>

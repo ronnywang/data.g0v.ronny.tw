@@ -1,0 +1,19 @@
+<?= $this->partial('common/header.phtml', $this) ?>
+<ol class="breadcrumb">
+    <li><a href="/">首頁</a>
+    <span class="divider">/</span></li>
+    <li><?= $this->escape($this->desc) ?></li>
+</ol>
+<div class="row-fluid">
+    <div class="span2">
+        <?= $this->partial('/common/menu.phtml', $this) ?>
+    </div>
+    <div class="span10">
+        <ol>
+            <?php foreach ($this->datasets as $dataset) { ?>
+            <li><a href="/index/data/<?= $dataset->id ?>"><?= $this->escape($dataset->name) ?></a></li>
+            <?php } ?>
+        </ol>
+    </div>
+</div>
+<?= $this->partial('common/footer.phtml', $this) ?>
