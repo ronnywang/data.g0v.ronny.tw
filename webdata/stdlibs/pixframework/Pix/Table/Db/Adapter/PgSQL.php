@@ -100,7 +100,7 @@ class Pix_Table_Db_Adapter_PgSQL extends Pix_Table_Db_Adapter_SQL
     public function createTable($table)
     {
         $sql = "CREATE TABLE \"" . $table->getTableName() . '"';
-        $types = array('bigint', 'tinyint', 'int', 'varchar', 'char', 'text', 'float', 'double', 'binary', 'geography');
+        $types = array('bigint', 'tinyint', 'int', 'varchar', 'char', 'text', 'float', 'double', 'binary', 'geography', 'json');
         $primarys = is_array($table->_primary) ? $table->_primary : array($table->_primary);
         $pk_isseted = false;
 
@@ -120,7 +120,7 @@ class Pix_Table_Db_Adapter_PgSQL extends Pix_Table_Db_Adapter_SQL
                 $s .= 'BYTEA';
             } elseif ('geography' == $db_type) {
                 if (array_key_exists('modifier', $column)) {
-                    $type = in_array(strtoupper($column['modifier'][0]), array('POINT', 'LINESTRING', 'POLYGON', 'MULTIPOINT', 'MULTILINESTRING', 'MULTIPOLYGON')) ? strtoupper($column['modifier'][0]) : 'POINT';
+                    $type = in_array(strtoupper($column['modifier'][0]), array('GEOMETRYCOLLECTION', 'POINT', 'LINESTRING', 'POLYGON', 'MULTIPOINT', 'MULTILINESTRING', 'MULTIPOLYGON')) ? strtoupper($column['modifier'][0]) : 'POINT';
                     $srid = array_key_exists(1, $column['modifier']) ? intval($column['modifier'][1]) : 0;
                 } else {
                     $type = 'POINT';
