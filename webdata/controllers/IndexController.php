@@ -50,5 +50,11 @@ class IndexController extends Pix_Controller
 
     public function indexAction()
     {
+        if ($_GET['q']) {
+            if ($set = DataSet::search("data->>'serialno' = '" . addslashes($_GET['q']) . "'")->first()) {
+                return $this->redirect('/index/data/' . $set->id);
+            }
+            return $this->redirect('/');
+        }
     }
 }
