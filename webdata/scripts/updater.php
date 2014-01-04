@@ -10,7 +10,7 @@ class Updater
         $data_list = $this->getDataList();
         $xml_list = $this->getDataXML();
 
-        $type_list = explode(',', 'csv,txt,xml,word,excel,json,ftp,demdsm,kml,kmz,none,olap,pdf,png,rar,rss,shp,webquery,webservices,wmszip,other');
+        $type_list = explode(',', 'csv,txt,xml,word,excel,json,ftp,demdsm,kml,kmz,none,olap,pdf,png,rar,rss,shp,webquery,webservices,wms,zip,other');
 
         $count = array();
         $count['kindName'] = array();
